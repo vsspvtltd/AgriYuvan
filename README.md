@@ -2,7 +2,7 @@
 
 ### Your Complete Farming Companion
 
-AgriYuvan is an end-to-end smart farming platform designed to support farmers throughout their entire agricultural journey—from soil preparation to crop sale. The platform provides farmers with actionable insights, crop guidance, disease detection, market information, and personalized assistance to improve productivity and profitability.
+AgriYuvan is an end-to-end smart farming platform designed to support farmers throughout their entire agricultural journey from soil preparation to crop sale. The platform provides farmers with actionable insights, crop guidance, disease detection, market information, and personalized assistance to improve productivity and profitability.
 
 ---
 
