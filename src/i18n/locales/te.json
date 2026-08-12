@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "home": "హోమ్",
+    "dashboard": "డ్యాష్‌బోర్డ్",
+    "assistant": "అసిస్టెంట్",
+    "login": "లాగిన్",
+    "register": "రిజిస్టర్"
+  },
+  "common": {
+    "welcome": "అగ్రిYUVAN కు స్వాగతం",
+    "tagline": "మీ పూర్తి వ్యవసాయ సహయుడు",
+    "continue": "కొనసాగించండి",
+    "back": "తిరిగి",
+    "next": "తర్వాత",
+    "submit": "సబ్మిట్",
+    "cancel": "రద్దు చేయి",
+    "save": "సేవ్",
+    "loading": "లోడ్ అవుతోంది",
+    "search": "శోధించు",
+    "close": "మూసివేయి",
+    "yes": "అవును",
+    "no": "కాదు",
+    "selectLanguage": "మీకు ఇష్టమైన భాషను ఎంచుకోండి",
+    "selectLanguageSubtitle": "AgriYUVAN అప్లికేషన్ కోసం ఒక భాషను ఎంచుకోండి.",
+    "languageNote": "మీరు ఎంచుకున్న భాషను మొత్తం పోర్టల్‌లో ఉపయోగిస్తారు.",
+    "login": "లాగిన్",
+    "register": "రిజిస్టర్",
+    "forgotPassword": "పాస్‌వర్డ్ మర్చిపోయారా?",
+    "email": "ఇమెయిల్",
+    "password": "పాస్‌వర్డ్",
+    "confirmPassword": "పాస్‌వర్డ్ ధృవీకరణ",
+    "name": "పేరు",
+    "logout": "లాగ్ అవుట్",
+    "dashboard": "డ్యాష్‌బోర్డ్",
+    "assistant": "వాయిస్ అసిస్టెంట్"
+  },
+  "auth": {
+    "createAccount": "మీ ఖాతాను సృష్టించండి",
+    "alreadyHaveAccount": "ఇప్పటికే ఖాతా ఉందా?",
+    "dontHaveAccount": "ఖాతా లేదా?",
+    "resetPassword": "మీ పాస్‌వర్డ్‌ను రీసెట్ చేయండి"
+  },
+  "assistant": {
+    "title": "అగ్రి యువాన్ వాయిస్ అసిస్టెంట్",
+    "subtitle": "పంటలు, వాతావరణం, వ్యాధి తనిఖీలు మరియు వ్యవసాయ ప్రణాళికల గురించి అడగండి.",
+    "placeholder": "ఇంగ్లీష్ లేదా తెలుగు‌లో మీ ప్రశ్నను అడగండి...",
+    "sample": "విత్తనానికి ముందు నేను ఏమి చేయాలి?"
+  },
+  "dashboard": {
+    "eyebrow": "Agricultural Services",
+    "welcomeBack": "Welcome back",
+    "subtitle": "Access AgriYUVAN agricultural services and tools from one place.",
+    "services": "Agricultural services",
+    "askAssistant": "Ask Assistant",
+    "needHelp": "Need help?",
+    "helpTitle": "Ask the AgriYUVAN Assistant",
+    "helpText": "Get quick guidance on crops, weather, soil, and farm planning.",
+    "helpAction": "Ask Assistant",
+    "serviceOverview": "Service overview",
+    "quickActions": "Quick actions",
+    "generalTip1": "Review the current condition before taking action.",
+    "generalTip2": "Use local guidance and weather updates for daily decisions.",
+    "soilAnalysis": {
+      "title": "Soil Analysis",
+      "description": "Check soil health and preparation guidance.",
+      "tip1": "Review soil fertility and moisture before sowing.",
+      "tip2": "Adjust nutrient planning based on field conditions."
+    },
+    "cropRecommendation": {
+      "title": "Crop Recommendation",
+      "description": "Get suitable crop recommendations for your land.",
+      "tip1": "Match crop choice with soil type and local climate.",
+      "tip2": "Plan sowing windows around rainfall and seasonal conditions."
+    },
+    "seedRecommendation": {
+      "title": "Seed Recommendation",
+      "description": "Find suitable seeds for your selected crop.",
+      "tip1": "Choose certified, high-quality seed for better germination.",
+      "tip2": "Store and handle seeds according to local guidelines."
+    },
+    "fertilizerRecommendation": {
+      "title": "Fertilizer Guidance",
+      "description": "Get fertilizer recommendations and schedules.",
+      "tip1": "Apply nutrients based on crop stage and soil test results.",
+      "tip2": "Use balanced fertilizer plans to protect soil health."
+    },
+    "pesticideRecommendation": {
+      "title": "Pesticide Guidance",
+      "description": "View safe pest-control guidance.",
+      "tip1": "Use pesticides only when needed and as recommended.",
+      "tip2": "Follow safe handling and waiting periods before harvest."
+    },
+    "weather": {
+      "title": "Weather Updates",
+      "description": "View weather information for farming decisions.",
+      "tip1": "Track rainfall, temperature, and humidity before field work.",
+      "tip2": "Adjust irrigation and crop protection based on conditions."
+    },
+    "marketPrices": {
+      "title": "Market Prices",
+      "description": "Check crop market prices and trends.",
+      "tip1": "Compare local market rates before selling produce.",
+      "tip2": "Plan harvest and transport around demand and pricing."
+    },
+    "cropMonitoring": {
+      "title": "Crop Monitoring",
+      "description": "Monitor crop growth and health.",
+      "tip1": "Regularly inspect growth stages and crop stress.",
+      "tip2": "Use timely action to reduce losses and improve yield."
+    }
+  }
+}

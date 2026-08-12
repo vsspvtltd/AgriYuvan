@@ -1,0 +1,138 @@
+{
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "assistant": "Assistant",
+    "login": "Login",
+    "register": "Register"
+  },
+  "common": {
+    "welcome": "Welcome to AgriYuvan",
+    "tagline": "Your Complete Farming Companion",
+    "continue": "Continue",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "loading": "Loading",
+    "search": "Search",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "selectLanguage": "Select your preferred language",
+    "selectLanguageSubtitle": "Choose a language for the AgriYUVAN application.",
+    "languageNote": "Your selected language will be used throughout the portal.",
+    "login": "Login",
+    "register": "Register",
+    "forgotPassword": "Forgot password?",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "name": "Name",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "assistant": "Multilingual Voice Assistant",
+    "officialService": "Official agricultural service",
+    "hidePassword": "Hide password",
+    "showPassword": "Show password"
+  },
+  "auth": {
+    "createAccount": "Create your account",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "resetPassword": "Reset your password",
+    "emailExists": "Email already in use",
+    "invalidEmail": "Invalid email",
+    "invalidPassword": "Invalid password",
+    "userNotFound": "User not found",
+    "passwordMismatch": "Passwords do not match",
+    "resetEmailSent": "Password reset email sent",
+    "somethingWentWrong": "Something went wrong",
+    "forgotPassword": "Forgot password?"
+  },
+  "assistant": {
+    "title": "AgriYuvan Voice Assistant",
+    "subtitle": "Ask about crops, weather, disease checks, and farm planning.",
+    "placeholder": "Ask your farming question in English or Telugu...",
+    "sample": "What should I do before sowing?",
+    "promptLabel": "Ask a question",
+    "send": "Send",
+    "response": "Assistant response",
+    "speechError": "Unable to play audio. Please try again.",
+    "defaultResponse": "Assistant reply for: {{question}}",
+    "listening": "Listen to response",
+    "stopVoice": "Stop voice",
+    "responseError": "The answer was generated, but voice playback could not be started."
+  },
+  "language": {
+    "welcomeTitle": "Choose your language",
+    "welcomeSubtitle": "Select the language that suits you best for the AgriYuvan portal.",
+    "selectLanguage": "Select your preferred language",
+    "selectLanguageSubtitle": "Choose a language for the AgriYUVAN application.",
+    "languageNote": "Your selected language will be used throughout the portal."
+  },
+  "dashboard": {
+    "eyebrow": "Agricultural Services",
+    "welcomeBack": "Welcome back",
+    "subtitle": "Access AgriYUVAN agricultural services and tools from one place.",
+    "services": "Agricultural services",
+    "askAssistant": "Ask Assistant",
+    "needHelp": "Need help?",
+    "helpTitle": "Ask the AgriYUVAN Assistant",
+    "helpText": "Get quick guidance on crops, weather, soil, and farm planning.",
+    "helpAction": "Ask Assistant",
+    "serviceOverview": "Service overview",
+    "quickActions": "Quick actions",
+    "generalTip1": "Review the current condition before taking action.",
+    "generalTip2": "Use local guidance and weather updates for daily decisions.",
+    "soilAnalysis": {
+      "title": "Soil Analysis",
+      "description": "Check soil health and preparation guidance.",
+      "tip1": "Review soil fertility and moisture before sowing.",
+      "tip2": "Adjust nutrient planning based on field conditions."
+    },
+    "cropRecommendation": {
+      "title": "Crop Recommendation",
+      "description": "Get suitable crop recommendations for your land.",
+      "tip1": "Match crop choice with soil type and local climate.",
+      "tip2": "Plan sowing windows around rainfall and seasonal conditions."
+    },
+    "seedRecommendation": {
+      "title": "Seed Recommendation",
+      "description": "Find suitable seeds for your selected crop.",
+      "tip1": "Choose certified, high-quality seed for better germination.",
+      "tip2": "Store and handle seeds according to local guidelines."
+    },
+    "fertilizerRecommendation": {
+      "title": "Fertilizer Guidance",
+      "description": "Get fertilizer recommendations and schedules.",
+      "tip1": "Apply nutrients based on crop stage and soil test results.",
+      "tip2": "Use balanced fertilizer plans to protect soil health."
+    },
+    "pesticideRecommendation": {
+      "title": "Pesticide Guidance",
+      "description": "View safe pest-control guidance.",
+      "tip1": "Use pesticides only when needed and as recommended.",
+      "tip2": "Follow safe handling and waiting periods before harvest."
+    },
+    "weather": {
+      "title": "Weather Updates",
+      "description": "View weather information for farming decisions.",
+      "tip1": "Track rainfall, temperature, and humidity before field work.",
+      "tip2": "Adjust irrigation and crop protection based on conditions."
+    },
+    "marketPrices": {
+      "title": "Market Prices",
+      "description": "Check crop market prices and trends.",
+      "tip1": "Compare local market rates before selling produce.",
+      "tip2": "Plan harvest and transport around demand and pricing."
+    },
+    "cropMonitoring": {
+      "title": "Crop Monitoring",
+      "description": "Monitor crop growth and health.",
+      "tip1": "Regularly inspect growth stages and crop stress.",
+      "tip2": "Use timely action to reduce losses and improve yield."
+    }
+  }
+}

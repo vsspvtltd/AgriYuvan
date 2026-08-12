@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "home": "ହୋମ",
+    "dashboard": "ଡ୍ୟାଶବୋର୍ଡ",
+    "assistant": "ସହାୟକ",
+    "login": "ଲଗଇନ୍",
+    "register": "ରଜିଷ୍ଟର"
+  },
+  "common": {
+    "welcome": "AgriYuvan ପାଇଁ ଆପଣଙ୍କୁ ସ୍ୱାଗତ",
+    "tagline": "ଆପଣଙ୍କର ସମ୍ପୂର୍ଣ୍ଣ କୃଷି ସାଥୀ।",
+    "continue": "ଚାଲୁ ରଖନ୍ତୁ",
+    "back": "ପଛକୁ",
+    "next": "ପରବର୍ତ୍ତୀ",
+    "submit": "ଦାଖଲ କରନ୍ତୁ",
+    "cancel": "ରଦ୍ଦ କରନ୍ତୁ",
+    "save": "ସଞ୍ଚୟ କରନ୍ତୁ",
+    "loading": "ଲୋଡ୍ ହେଉଛି...",
+    "search": "ଖୋଜନ୍ତୁ",
+    "close": "ବନ୍ଦ କରନ୍ତୁ",
+    "yes": "ହଁ",
+    "no": "ନା",
+    "email": "ଇମେଲ୍",
+    "password": "ପାସୱାର୍ଡ",
+    "confirmPassword": "ପାସୱାର୍ଡ ନିଶ୍ଚିତ କରନ୍ତୁ",
+    "logout": "ଲଗଆଉଟ୍",
+    "dashboard": "ଡ୍ୟାଶବୋର୍ଡ",
+    "assistant": "ଭୋଇସ୍ ସହାୟକ"
+  },
+  "auth": {
+    "createAccount": "ଆପଣଙ୍କର ଖାତା ତିଆରି କରନ୍ତୁ",
+    "alreadyHaveAccount": "ପୂର୍ବରୁ ଖାତା ଅଛି?",
+    "dontHaveAccount": "ଖାତା ନାହିଁ?",
+    "forgotPassword": "ପାସୱାର୍ଡ ଭୁଲିଗଲେ?",
+    "resetPassword": "ଆପଣଙ୍କର ପାସୱାର୍ଡ ପୁନଃସେଟ୍ କରନ୍ତୁ",
+    "loginSuccess": "ଲଗଇନ୍ ସଫଳ ହେଲା",
+    "registerSuccess": "ରଜିଷ୍ଟ୍ରେସନ୍ ସଫଳ ହେଲା",
+    "invalidEmail": "ଅବୈଧ ଇମେଲ୍",
+    "invalidPassword": "ଅବୈଧ ପାସୱାର୍ଡ",
+    "userNotFound": "ଉପଯୋଗକର୍ତ୍ତା ମିଳିଲା ନାହିଁ",
+    "emailExists": "ଇମେଲ୍ ପୂର୍ବରୁ ଅଛି",
+    "passwordMismatch": "ପାସୱାର୍ଡ ମେଳ ହେଉ ନାହିଁ",
+    "resetEmailSent": "ପାସୱାର୍ଡ ପୁନଃସେଟ୍ ଇମେଲ୍ ପଠାଯାଇଛି",
+    "somethingWentWrong": "କିଛି ଭୁଲ୍ ହେଲା"
+  },
+  "agriculture": {
+    "soilAnalysis": "ମାଟି ବିଶ୍ଳେଷଣ",
+    "cropRecommendation": "ଫସଲ ସୁପାରିଶ",
+    "seedRecommendation": "ବୀଜ ସୁପାରିଶ",
+    "fertilizerRecommendation": "ଉର୍ବରକ ସୁପାରିଶ",
+    "pesticideRecommendation": "କୀଟନାଶକ ସୁପାରିଶ",
+    "weather": "ଆବହାଉ କ",
+    "marketPrices": "ବଜାର ମୂଲ୍ୟ",
+    "farmInformation": "କୃଷି ସୂଚନା",
+    "cropMonitoring": "ଫସଲ ନିରୀକ୍ଷଣ",
+    "diseaseDetection": "ରୋଗ ଚିହ୍ନଟ"
+  },
+  "voice": {
+    "assistant": "ଭୋଇସ୍ ସହାୟକ",
+    "listen": "ଶୁଣନ୍ତୁ",
+    "stop": "ଥାମନ୍ତୁ",
+    "speaking": "କହୁଛି",
+    "loading": "ଲୋଡ୍ ହେଉଛି...",
+    "unavailable": "ଭୋଇସ୍ ଉପଲବ୍ଧ ନାହିଁ",
+    "tryAgain": "ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ"
+  },
+  "dashboard": {
+    "eyebrow": "Agricultural Services",
+    "welcomeBack": "Welcome back",
+    "subtitle": "Access AgriYUVAN agricultural services and tools from one place.",
+    "services": "Agricultural services",
+    "askAssistant": "Ask Assistant",
+    "needHelp": "Need help?",
+    "helpTitle": "Ask the AgriYUVAN Assistant",
+    "helpText": "Get quick guidance on crops, weather, soil, and farm planning.",
+    "helpAction": "Ask Assistant",
+    "serviceOverview": "Service overview",
+    "quickActions": "Quick actions",
+    "generalTip1": "Review the current condition before taking action.",
+    "generalTip2": "Use local guidance and weather updates for daily decisions.",
+    "soilAnalysis": {
+      "title": "Soil Analysis",
+      "description": "Check soil health and preparation guidance.",
+      "tip1": "Review soil fertility and moisture before sowing.",
+      "tip2": "Adjust nutrient planning based on field conditions."
+    },
+    "cropRecommendation": {
+      "title": "Crop Recommendation",
+      "description": "Get suitable crop recommendations for your land.",
+      "tip1": "Match crop choice with soil type and local climate.",
+      "tip2": "Plan sowing windows around rainfall and seasonal conditions."
+    },
+    "seedRecommendation": {
+      "title": "Seed Recommendation",
+      "description": "Find suitable seeds for your selected crop.",
+      "tip1": "Choose certified, high-quality seed for better germination.",
+      "tip2": "Store and handle seeds according to local guidelines."
+    },
+    "fertilizerRecommendation": {
+      "title": "Fertilizer Guidance",
+      "description": "Get fertilizer recommendations and schedules.",
+      "tip1": "Apply nutrients based on crop stage and soil test results.",
+      "tip2": "Use balanced fertilizer plans to protect soil health."
+    },
+    "pesticideRecommendation": {
+      "title": "Pesticide Guidance",
+      "description": "View safe pest-control guidance.",
+      "tip1": "Use pesticides only when needed and as recommended.",
+      "tip2": "Follow safe handling and waiting periods before harvest."
+    },
+    "weather": {
+      "title": "Weather Updates",
+      "description": "View weather information for farming decisions.",
+      "tip1": "Track rainfall, temperature, and humidity before field work.",
+      "tip2": "Adjust irrigation and crop protection based on conditions."
+    },
+    "marketPrices": {
+      "title": "Market Prices",
+      "description": "Check crop market prices and trends.",
+      "tip1": "Compare local market rates before selling produce.",
+      "tip2": "Plan harvest and transport around demand and pricing."
+    },
+    "cropMonitoring": {
+      "title": "Crop Monitoring",
+      "description": "Monitor crop growth and health.",
+      "tip1": "Regularly inspect growth stages and crop stress.",
+      "tip2": "Use timely action to reduce losses and improve yield."
+    }
+  }
+}

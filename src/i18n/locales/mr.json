@@ -1,0 +1,147 @@
+{
+  "nav": {
+    "home": "होम",
+    "dashboard": "डॅशबोर्ड",
+    "assistant": "सहायक",
+    "login": "लॉगिन",
+    "register": "नोंदणी"
+  },
+  "common": {
+    "welcome": "AgriYuvan मध्ये तुमचे स्वागत आहे",
+    "tagline": "तुमचा संपूर्ण शेती साथी.",
+    "continue": "पुढे चला",
+    "back": "परत",
+    "next": "पुढे",
+    "submit": "सबमिट करा",
+    "cancel": "रद्द करा",
+    "save": "जतन करा",
+    "loading": "लोड करत आहे...",
+    "search": "शोधा",
+    "close": "बंद करा",
+    "yes": "होय",
+    "no": "नाही",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "confirmPassword": "पासवर्ड पुष्टी करा",
+    "logout": "लॉगआउट",
+    "dashboard": "डॅशबोर्ड",
+    "assistant": "व्हॉइस सहायक",
+    "officialService": "Official agricultural service",
+    "hidePassword": "Hide password",
+    "showPassword": "Show password"
+  },
+  "auth": {
+    "createAccount": "तुमचे खाते तयार करा",
+    "alreadyHaveAccount": "आधीपासून खाते आहे?",
+    "dontHaveAccount": "खाते नाही का?",
+    "forgotPassword": "पासवर्ड विसरलात का?",
+    "resetPassword": "तुमचा पासवर्ड रीसेट करा",
+    "loginSuccess": "लॉगिन यशस्वी झाला",
+    "registerSuccess": "नोंदणी यशस्वी झाली",
+    "invalidEmail": "अवैध ईमेल",
+    "invalidPassword": "अवैध पासवर्ड",
+    "userNotFound": "वापरकर्ता सापडला नाही",
+    "emailExists": "ईमेल आधीपासून आहे",
+    "passwordMismatch": "पासवर्ड जुळत नाही",
+    "resetEmailSent": "पासवर्ड रीसेट ईमेल पाठवण्यात आले आहे",
+    "somethingWentWrong": "काहीतरी चुकले"
+  },
+  "agriculture": {
+    "soilAnalysis": "माती विश्लेषण",
+    "cropRecommendation": "पिकाची शिफारस",
+    "seedRecommendation": "बियांचे शिफारस",
+    "fertilizerRecommendation": "खते शिफारस",
+    "pesticideRecommendation": "कीटकनाशक शिफारस",
+    "weather": "हवामान",
+    "marketPrices": "बाजार दर",
+    "farmInformation": "शेत माहिती",
+    "cropMonitoring": "पिक देखरेख",
+    "diseaseDetection": "रोग शोध"
+  },
+  "voice": {
+    "assistant": "व्हॉइस सहायक",
+    "listen": "ऐका",
+    "stop": "थांबवा",
+    "speaking": "बोलत आहे",
+    "loading": "लोड करत आहे...",
+    "unavailable": "व्हॉइस उपलब्ध नाही",
+    "tryAgain": "पुन्हा प्रयत्न करा"
+  },
+  "language": {
+    "welcomeTitle": "Choose your language",
+    "welcomeSubtitle": "Select the language that suits you best for the AgriYuvan portal.",
+    "selectLanguage": "Select your preferred language",
+    "selectLanguageSubtitle": "Choose a language for the AgriYUVAN application.",
+    "languageNote": "Your selected language will be used throughout the portal."
+  },
+  "assistant": {
+    "promptLabel": "Ask a question",
+    "send": "Send",
+    "response": "Assistant response",
+    "speechError": "Unable to play audio. Please try again.",
+    "defaultResponse": "Assistant reply for: {{question}}"
+  },
+  "dashboard": {
+    "eyebrow": "Agricultural Services",
+    "welcomeBack": "Welcome back",
+    "subtitle": "Access AgriYUVAN agricultural services and tools from one place.",
+    "services": "Agricultural services",
+    "askAssistant": "Ask Assistant",
+    "needHelp": "Need help?",
+    "helpTitle": "Ask the AgriYUVAN Assistant",
+    "helpText": "Get quick guidance on crops, weather, soil, and farm planning.",
+    "helpAction": "Ask Assistant",
+    "serviceOverview": "Service overview",
+    "quickActions": "Quick actions",
+    "generalTip1": "Review the current condition before taking action.",
+    "generalTip2": "Use local guidance and weather updates for daily decisions.",
+    "soilAnalysis": {
+      "title": "Soil Analysis",
+      "description": "Check soil health and preparation guidance.",
+      "tip1": "Review soil fertility and moisture before sowing.",
+      "tip2": "Adjust nutrient planning based on field conditions."
+    },
+    "cropRecommendation": {
+      "title": "Crop Recommendation",
+      "description": "Get suitable crop recommendations for your land.",
+      "tip1": "Match crop choice with soil type and local climate.",
+      "tip2": "Plan sowing windows around rainfall and seasonal conditions."
+    },
+    "seedRecommendation": {
+      "title": "Seed Recommendation",
+      "description": "Find suitable seeds for your selected crop.",
+      "tip1": "Choose certified, high-quality seed for better germination.",
+      "tip2": "Store and handle seeds according to local guidelines."
+    },
+    "fertilizerRecommendation": {
+      "title": "Fertilizer Guidance",
+      "description": "Get fertilizer recommendations and schedules.",
+      "tip1": "Apply nutrients based on crop stage and soil test results.",
+      "tip2": "Use balanced fertilizer plans to protect soil health."
+    },
+    "pesticideRecommendation": {
+      "title": "Pesticide Guidance",
+      "description": "View safe pest-control guidance.",
+      "tip1": "Use pesticides only when needed and as recommended.",
+      "tip2": "Follow safe handling and waiting periods before harvest."
+    },
+    "weather": {
+      "title": "Weather Updates",
+      "description": "View weather information for farming decisions.",
+      "tip1": "Track rainfall, temperature, and humidity before field work.",
+      "tip2": "Adjust irrigation and crop protection based on conditions."
+    },
+    "marketPrices": {
+      "title": "Market Prices",
+      "description": "Check crop market prices and trends.",
+      "tip1": "Compare local market rates before selling produce.",
+      "tip2": "Plan harvest and transport around demand and pricing."
+    },
+    "cropMonitoring": {
+      "title": "Crop Monitoring",
+      "description": "Monitor crop growth and health.",
+      "tip1": "Regularly inspect growth stages and crop stress.",
+      "tip2": "Use timely action to reduce losses and improve yield."
+    }
+  }
+}
