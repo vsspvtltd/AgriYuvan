@@ -9,10 +9,25 @@ export default function AssistantPage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [input, setInput] = useState('');
   const [response, setResponse] = useState('');
+  const [sources, setSources] = useState<string[]>([]);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [voiceError, setVoiceError] = useState('');
+
+  const parseResponse = (fullResponse: string) => {
+    const sourcesMatch = fullResponse.match(/Sources:\n((?:- .+\n?)+)/);
+    if (sourcesMatch) {
+      const sourcesText = sourcesMatch[1];
+      const sourceList = sourcesText
+        .split('\n')
+        .map(s => s.replace(/^- /, '').trim())
+        .filter(Boolean);
+      const mainResponse = fullResponse.replace(/Sources:\n(?:- .+\n?)+/, '').trim();
+      return { text: mainResponse, sources: sourceList };
+    }
+    return { text: fullResponse, sources: [] };
+  };
 
   const handleStopVoice = () => {
     if (audioRef.current) {
@@ -30,13 +45,17 @@ export default function AssistantPage() {
     setError('');
     setVoiceError('');
     setAudioUrl(null);
+    setResponse('');
+    setSources([]);
 
     try {
       const generatedResponse = await generateAssistantResponse(question, i18n.language);
-      setResponse(generatedResponse);
+      const { text, sources: parsedSources } = parseResponse(generatedResponse);
+      setResponse(text);
+      setSources(parsedSources);
 
       try {
-        const result = await speakText(generatedResponse, i18n.language);
+        const result = await speakText(text, i18n.language);
         setAudioUrl(result.audioUrl);
       } catch (voiceFailure) {
         const message = voiceFailure instanceof Error ? voiceFailure.message : 'The answer was generated, but voice playback could not be started.';
@@ -102,7 +121,17 @@ export default function AssistantPage() {
           {response ? (
             <>
               <div className="status-pill">{t('assistant.response')}</div>
-              <p style={{ marginTop: '0.75rem', color: '#0f172a', lineHeight: 1.7 }}>{response}</p>
+              <p style={{ marginTop: '0.75rem', color: '#0f172a', lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{response}</p>
+              {sources.length > 0 && (
+                <div style={{ marginTop: '1.5rem', padding: '1rem', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                  <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#475569', marginBottom: '0.5rem' }}>Sources:</div>
+                  <ul style={{ margin: 0, paddingLeft: '1.25rem', color: '#64748b', fontSize: '0.85rem' }}>
+                    {sources.map((source, index) => (
+                      <li key={index} style={{ marginBottom: '0.25rem' }}>{source}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {audioUrl ? (
                 <div className="assistant-audio-controls">
                   <button type="button" className="btn btn-secondary" onClick={handlePlayAudio}>
