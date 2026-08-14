@@ -26,7 +26,7 @@ export default function LanguageSelectionPage() {
   const handleContinue = () => {
     localStorage.setItem(LANGUAGE_STORAGE_KEY, selectedLanguage);
     i18n.changeLanguage(selectedLanguage);
-    navigate('/login');
+    navigate('/phone-login');
   };
 
   return (

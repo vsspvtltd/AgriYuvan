@@ -1,11 +1,14 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Send, Volume2, Square } from 'lucide-react';
-import { generateAssistantResponse, speakText } from '../services/voice';
+import { generateAssistantResponse, speakText, UserContext } from '../services/voice';
 import Logo from '../components/Logo';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function AssistantPage() {
   const { t, i18n } = useTranslation();
+  const { userProfile } = useContext(AuthContext);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [input, setInput] = useState('');
   const [response, setResponse] = useState('');
@@ -49,7 +52,16 @@ export default function AssistantPage() {
     setSources([]);
 
     try {
-      const generatedResponse = await generateAssistantResponse(question, i18n.language);
+      // Build user context from userProfile
+      const userContext: UserContext | undefined = userProfile ? {
+        role: userProfile.role,
+        language: userProfile.language || i18n.language,
+        farmerProfile: userProfile.farmerProfile,
+        vendorProfile: userProfile.vendorProfile,
+        traderProfile: userProfile.traderProfile,
+      } : undefined;
+
+      const generatedResponse = await generateAssistantResponse(question, i18n.language, userContext);
       const { text, sources: parsedSources } = parseResponse(generatedResponse);
       setResponse(text);
       setSources(parsedSources);

@@ -1,6 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import { supportedLanguages } from '../config/languages';
 import { generateVoiceReply } from './elevenlabs';
+import { UserRole } from './userProfileService';
 
 export interface VoiceResponse {
   text: string;
@@ -10,6 +11,30 @@ export interface VoiceResponse {
 export interface AssistantResponse {
   text: string;
   sources?: string[];
+}
+
+export interface UserContext {
+  role: UserRole;
+  language: string;
+  farmerProfile?: {
+    name: string;
+    phone: string;
+    totalAcres: string;
+    landPlots: any[];
+    crops: any[];
+  };
+  vendorProfile?: {
+    name: string;
+    phone: string;
+    requirements: any[];
+  };
+  traderProfile?: {
+    name: string;
+    phone: string;
+    tradingRequirements: string;
+    cropsOfInterest: string;
+    marketLocation: string;
+  };
 }
 
 const geminiApiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -306,7 +331,11 @@ async function generateGeminiResponseWithGrounding(
   }
 }
 
-export async function generateAssistantResponse(question: string, language: string = 'en'): Promise<string> {
+export async function generateAssistantResponse(
+  question: string, 
+  language: string = 'en',
+  userContext?: UserContext
+): Promise<string> {
   const trimmedQuestion = question.trim();
 
   if (!trimmedQuestion) {
@@ -316,7 +345,53 @@ export async function generateAssistantResponse(question: string, language: stri
   // Categorize the question
   const categorization = categorizeQuestion(trimmedQuestion);
   
-  // If critical information is missing, ask for it
+  // Build context-aware prompt
+  let contextPrompt = '';
+  if (userContext) {
+    contextPrompt = '\n\nUser Context:\n';
+    contextPrompt += `Role: ${userContext.role}\n`;
+    contextPrompt += `Language: ${userContext.language}\n`;
+    
+    if (userContext.role === 'farmer' && userContext.farmerProfile) {
+      contextPrompt += `Total Land: ${userContext.farmerProfile.totalAcres} acres\n`;
+      if (userContext.farmerProfile.landPlots.length > 0) {
+        contextPrompt += `Land Plots: ${userContext.farmerProfile.landPlots.map(p => 
+          `${p.area} acres at ${p.location} (${p.soilType})`
+        ).join(', ')}\n`;
+      }
+      if (userContext.farmerProfile.crops.length > 0) {
+        contextPrompt += `Crops: ${userContext.farmerProfile.crops.map(c => 
+          `${c.cropName} (${c.season})`
+        ).join(', ')}\n`;
+      }
+    } else if (userContext.role === 'vendor' && userContext.vendorProfile) {
+      contextPrompt += `Vendor Requirements: ${userContext.vendorProfile.requirements.map(r => r.description).join(', ')}\n`;
+    } else if (userContext.role === 'trader' && userContext.traderProfile) {
+      contextPrompt += `Trading Requirements: ${userContext.traderProfile.tradingRequirements}\n`;
+      contextPrompt += `Crops of Interest: ${userContext.traderProfile.cropsOfInterest}\n`;
+      contextPrompt += `Market Location: ${userContext.traderProfile.marketLocation}\n`;
+    }
+  }
+  
+  // If critical information is missing from the question but available in context, use it
+  if (categorization.missingInfo && categorization.missingInfo.length > 0 && userContext) {
+    const availableInContext = categorization.missingInfo.filter(info => {
+      if (info === 'crop' && userContext.farmerProfile?.crops && userContext.farmerProfile.crops.length > 0) return false;
+      if (info === 'soil type' && userContext.farmerProfile?.landPlots && userContext.farmerProfile.landPlots.length > 0) return false;
+      if (info === 'district/state' && userContext.farmerProfile?.landPlots && userContext.farmerProfile.landPlots.some(p => p.location)) return false;
+      return true;
+    });
+    
+    if (availableInContext.length === 0) {
+      // All missing info is available in context, proceed
+      categorization.missingInfo = undefined;
+    } else if (availableInContext.length < categorization.missingInfo.length) {
+      // Some info is available in context
+      categorization.missingInfo = availableInContext;
+    }
+  }
+  
+  // If still missing critical information, ask for it
   if (categorization.missingInfo && categorization.missingInfo.length > 0) {
     const missingInfoText = categorization.missingInfo.join(', ');
     return `To give you a useful answer, I need to know: ${missingInfoText}. Please provide these details.`;
@@ -329,7 +404,7 @@ export async function generateAssistantResponse(question: string, language: stri
 
   try {
     const { text, sources } = await generateGeminiResponseWithGrounding(
-      trimmedQuestion,
+      trimmedQuestion + contextPrompt,
       language,
       categorization.requiresGrounding
     );

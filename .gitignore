@@ -2,3 +2,7 @@
 .env.*
 !.env.example
 node_modules
+dist/
+*.tsbuildinfo
+vite.config.js.timestamp-*.mjs
+vite.config.d.ts

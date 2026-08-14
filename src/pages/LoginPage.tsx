@@ -29,7 +29,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const from = (location.state as { from?: { pathname: string } })?.from?.pathname || '/dashboard';
+  const from = (location.state as { from?: { pathname: string } })?.from?.pathname || '/role-selection';
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
