@@ -1,0 +1,190 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function getUserRole(userId) {
+      return get(/databases/$(database)/documents/users/$(userId)).data.role;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && getUserRole(request.auth.uid) == 'admin';
+    }
+    
+    function isFarmer() {
+      return isAuthenticated() && getUserRole(request.auth.uid) == 'farmer';
+    }
+    
+    function isVendor() {
+      return isAuthenticated() && getUserRole(request.auth.uid) == 'vendor';
+    }
+    
+    function isTrader() {
+      return isAuthenticated() && getUserRole(request.auth.uid) == 'trader';
+    }
+    
+    function isActiveUser(userId) {
+      return get(/databases/$(database)/documents/users/$(userId)).data.isActive == true;
+    }
+
+    // users collection
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if isOwner(userId) || isAdmin();
+      
+      // farmers subcollection
+      match /farmers/{farmerId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId) || isAdmin();
+        allow update: if isOwner(userId) || isAdmin();
+        allow delete: if isAdmin();
+        
+        // landPlots subcollection
+        match /landPlots/{plotId} {
+          allow read: if isOwner(userId) || isAdmin();
+          allow create: if isOwner(userId);
+          allow update: if isOwner(userId);
+          allow delete: if isOwner(userId) || isAdmin();
+        }
+        
+        // farmerCrops subcollection
+        match /farmerCrops/{cropId} {
+          allow read: if isOwner(userId) || isAdmin();
+          allow create: if isOwner(userId);
+          allow update: if isOwner(userId);
+          allow delete: if isOwner(userId) || isAdmin();
+        }
+        
+        // cropRecommendations subcollection
+        match /cropRecommendations/{recId} {
+          allow read: if isOwner(userId) || isAdmin();
+          allow create: if isOwner(userId);
+          allow update: if isOwner(userId);
+          allow delete: if isOwner(userId) || isAdmin();
+        }
+      }
+      
+      // userHistory subcollection
+      match /userHistory/{historyId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId);
+        allow update: if isAdmin(); // Only admin can modify history
+        allow delete: if isAdmin();
+      }
+      
+      // userProgress subcollection
+      match /userProgress/{progressId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow write: if isOwner(userId) || isAdmin();
+      }
+      
+      // scanHistory subcollection
+      match /scanHistory/{scanId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId);
+        allow update: if isAdmin();
+        allow delete: if isAdmin();
+      }
+      
+      // devices subcollection
+      match /devices/{deviceId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId);
+        allow update: if isOwner(userId);
+        allow delete: if isOwner(userId) || isAdmin();
+        
+        // sensorReadings subcollection
+        match /sensorReadings/{readingId} {
+          allow read: if isOwner(userId) || isAdmin();
+          allow create: if isOwner(userId);
+          allow update: if isAdmin();
+          allow delete: if isAdmin();
+        }
+      }
+      
+      // testerRequests subcollection
+      match /testerRequests/{requestId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId);
+        allow update: if isOwner(userId) || isAdmin();
+        allow delete: if isAdmin();
+      }
+      
+      // seedOrders subcollection
+      match /seedOrders/{orderId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId);
+        allow update: if isOwner(userId) || isAdmin();
+        allow delete: if isAdmin();
+      }
+      
+      // subscriptions subcollection
+      match /subscriptions/{subId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId);
+        allow update: if isOwner(userId) || isAdmin();
+        allow delete: if isAdmin();
+      }
+    }
+    
+    // vendors collection
+    match /vendors/{vendorId} {
+      allow read: if true; // Public read for browsing
+      allow create: if isAuthenticated();
+      allow update: if isOwner(request.auth.uid) || isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // traders collection
+    match /traders/{traderId} {
+      allow read: if true; // Public read for browsing
+      allow create: if isAuthenticated();
+      allow update: if isOwner(request.auth.uid) || isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // seeds collection
+    match /seeds/{seedId} {
+      allow read: if true; // Public read for browsing
+      allow create: if isVendor() || isAdmin();
+      allow update: if isOwner(resource.data.sellerId) || isAdmin();
+      allow delete: if isOwner(resource.data.sellerId) || isAdmin();
+    }
+    
+    // testers collection
+    match /testers/{testerId} {
+      allow read: if true; // Public read for browsing
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // products collection
+    match /products/{productId} {
+      allow read: if true; // Public read for browsing
+      allow create: if isVendor() || isAdmin();
+      allow update: if isOwner(resource.data.sellerId) || isAdmin();
+      allow delete: if isOwner(resource.data.sellerId) || isAdmin();
+    }
+    
+    // subscriptionPlans collection
+    match /subscriptionPlans/{planId} {
+      allow read: if true; // Public read
+      allow write: if isAdmin();
+    }
+    
+    // weatherCache collection
+    match /weatherCache/{cacheId} {
+      allow read: if true; // Public read
+      allow write: if isAdmin() || isAuthenticated(); // Any authenticated user can cache weather
+    }
+  }
+}
