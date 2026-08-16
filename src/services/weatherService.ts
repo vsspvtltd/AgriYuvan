@@ -1,5 +1,13 @@
-// Weather Service - Uses OpenWeatherMap API for real weather data
+// Weather Service - Uses OpenWeatherMap API for real weather data with Firestore caching
 // Environment variable required: VITE_OPENWEATHER_API_KEY
+
+import { 
+  doc, 
+  getDoc, 
+  setDoc, 
+  Timestamp 
+} from 'firebase/firestore';
+import { getFirestoreDB } from './firebase';
 
 export interface WeatherData {
   location: string;
@@ -27,26 +35,106 @@ export interface WeatherResponse {
   error?: string;
 }
 
+export interface CachedWeatherData {
+  location: string;
+  state: string;
+  district?: string;
+  latitude?: number;
+  longitude?: number;
+  currentWeather: {
+    temperature: number;
+    condition: string;
+    humidity: number;
+    windSpeed?: number;
+    rainfall?: number;
+    feelsLike?: number;
+  };
+  forecast?: any[];
+  alerts?: string[];
+  lastUpdated: Timestamp;
+  expiresAt: Timestamp;
+}
+
 const WEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 const WEATHER_BASE_URL = 'https://api.openweathermap.org/data/2.5';
+const WEATHER_CACHE_COLLECTION = 'weatherCache';
+const CACHE_DURATION_MINUTES = 60; // Cache for 1 hour
 
-// Cache weather data for 30 minutes
-const WEATHER_CACHE_DURATION = 30 * 60 * 1000;
-const weatherCache = new Map<string, { data: WeatherResponse; timestamp: number }>();
+const db = getFirestoreDB();
 
-function getFromCache(location: string): WeatherResponse | null {
-  const cached = weatherCache.get(location);
-  if (cached && Date.now() - cached.timestamp < WEATHER_CACHE_DURATION) {
-    return cached.data;
+// Firestore-based caching
+async function getFromFirestoreCache(location: string, state: string): Promise<CachedWeatherData | null> {
+  try {
+    const cacheId = `${state}_${location.toLowerCase().replace(/\s+/g, '_')}`;
+    const cacheRef = doc(db, WEATHER_CACHE_COLLECTION, cacheId);
+    const cacheSnap = await getDoc(cacheRef);
+    
+    if (cacheSnap.exists()) {
+      const cachedData = cacheSnap.data() as CachedWeatherData;
+      const now = Timestamp.now();
+      
+      // Check if cache is still valid
+      if (cachedData.expiresAt.toDate() > now.toDate()) {
+        return cachedData;
+      }
+    }
+    
+    return null;
+  } catch (error) {
+    console.error('Error reading from Firestore cache:', error);
+    return null;
   }
-  return null;
 }
 
-function setCache(location: string, data: WeatherResponse): void {
-  weatherCache.set(location, { data, timestamp: Date.now() });
+async function setFirestoreCache(
+  location: string,
+  state: string,
+  weatherResponse: WeatherResponse,
+  district?: string,
+  latitude?: number,
+  longitude?: number
+): Promise<void> {
+  try {
+    const cacheId = `${state}_${location.toLowerCase().replace(/\s+/g, '_')}`;
+    const cacheRef = doc(db, WEATHER_CACHE_COLLECTION, cacheId);
+    
+    const now = Timestamp.now();
+    const expiresAt = new Timestamp(now.seconds + (CACHE_DURATION_MINUTES * 60), now.nanoseconds);
+    
+    const cachedData: CachedWeatherData = {
+      location,
+      state,
+      district,
+      latitude,
+      longitude,
+      currentWeather: {
+        temperature: weatherResponse.current.temperature,
+        condition: weatherResponse.current.description,
+        humidity: weatherResponse.current.humidity,
+        windSpeed: weatherResponse.current.windSpeed,
+        rainfall: weatherResponse.current.precipitation,
+        feelsLike: weatherResponse.current.feelsLike,
+      },
+      forecast: weatherResponse.forecast,
+      alerts: [],
+      lastUpdated: now,
+      expiresAt,
+    };
+    
+    await setDoc(cacheRef, cachedData);
+  } catch (error) {
+    console.error('Error writing to Firestore cache:', error);
+    // Don't throw error - weather should still work even if caching fails
+  }
 }
 
-export async function getCurrentWeather(location: string): Promise<WeatherResponse> {
+export async function getCurrentWeather(
+  location: string, 
+  state: string = 'Unknown',
+  district?: string,
+  latitude?: number,
+  longitude?: number
+): Promise<WeatherResponse> {
   if (!WEATHER_API_KEY) {
     return {
       current: {} as WeatherData,
@@ -54,10 +142,26 @@ export async function getCurrentWeather(location: string): Promise<WeatherRespon
     };
   }
 
-  // Check cache first
-  const cached = getFromCache(location);
+  // Check Firestore cache first
+  const cached = await getFromFirestoreCache(location, state);
   if (cached) {
-    return cached;
+    // Convert cached data back to WeatherResponse format
+    const current: WeatherData = {
+      location: cached.location,
+      temperature: cached.currentWeather.temperature,
+      humidity: cached.currentWeather.humidity,
+      description: cached.currentWeather.condition,
+      windSpeed: cached.currentWeather.windSpeed || 0,
+      precipitation: cached.currentWeather.rainfall || 0,
+      feelsLike: cached.currentWeather.feelsLike || cached.currentWeather.temperature,
+      timestamp: cached.lastUpdated.toDate(),
+      source: 'OpenWeatherMap (Cached)',
+    };
+
+    return {
+      current,
+      forecast: cached.forecast,
+    };
   }
 
   try {
@@ -112,7 +216,10 @@ export async function getCurrentWeather(location: string): Promise<WeatherRespon
     }
 
     const response: WeatherResponse = { current, forecast };
-    setCache(location, response);
+    
+    // Cache in Firestore
+    await setFirestoreCache(location, state, response, district, latitude, longitude);
+    
     return response;
 
   } catch (error) {
