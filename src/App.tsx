@@ -16,6 +16,11 @@ import TraderDetailsPage from './pages/TraderDetailsPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import OnboardingRoute from './components/OnboardingRoute';
 import ServicePage from './pages/ServicePage';
+import SeedSelectionPage from './pages/SeedSelectionPage';
+import NearbySellersPage from './pages/NearbySellersPage';
+import PriceComparisonPage from './pages/PriceComparisonPage';
+import TesterPage from './pages/TesterPage';
+import AdminDashboard from './pages/AdminDashboard';
 import { dashboardServices } from './config/dashboardServices';
 
 function DashboardServiceRoute() {
@@ -90,6 +95,49 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+        {/* New feature routes */}
+        <Route
+          path="/seed-selection"
+          element={
+            <ProtectedRoute>
+              <SeedSelectionPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/nearby-sellers"
+          element={
+            <ProtectedRoute>
+              <NearbySellersPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/price-comparison"
+          element={
+            <ProtectedRoute>
+              <PriceComparisonPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/tester"
+          element={
+            <ProtectedRoute>
+              <TesterPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        {/* Demo route to bypass authentication for development */}
+        <Route path="/demo" element={<DashboardPage />} />
         <Route path="*" element={<Navigate to="/language" replace />} />
       </Routes>
     </div>
